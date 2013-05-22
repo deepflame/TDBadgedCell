@@ -193,11 +193,7 @@
         [self configureSelf];
         
 		// Force badges to hide on edit.
-		if(self.editing)
-			[self.badge setHidden:YES];
-		else
-			[self.badge setHidden:NO];
-		
+        self.badge.hidden = self.editing ? YES : NO;
 		
         // Calculate the size of the bage from the badge string
 		CGSize badgeSize = [self.badgeString sizeWithFont:[UIFont boldSystemFontOfSize: self.badge.fontSize]];
@@ -275,19 +271,9 @@
 {
 	[super setEditing:editing animated:animated];
 	
-	if (editing)
-	{
-		self.badge.hidden = YES;
-		[self.badge setNeedsDisplay];
-		[self setNeedsDisplay];
-	}
-	else
-	{
-		self.badge.hidden = NO;
-		[self.badge setNeedsDisplay];
-		[self setNeedsDisplay];
-	}
-}
+    self.badge.hidden = editing ? YES : NO;
+    [self.badge setNeedsDisplay];
+    [self setNeedsDisplay];}
 
 #if !__has_feature(objc_arc)
 - (void)dealloc
