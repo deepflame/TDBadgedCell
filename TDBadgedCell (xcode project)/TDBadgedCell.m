@@ -191,9 +191,7 @@
 	[super layoutSubviews];
 	
 	if(self.badgeString)
-	{
-        [self configureSelf];
-        
+	{        
 		// Hide badges on edit
         self.badge.hidden = self.hideBadgeDuringEditing && self.editing;
 		
