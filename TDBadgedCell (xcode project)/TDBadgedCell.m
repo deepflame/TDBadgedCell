@@ -164,6 +164,8 @@
     self.badgeLeftOffset = 10.f;
     self.badgeRightOffset = 12.f;
     
+    self.hideBadgeDuringEditing = YES;
+    
     // by default, resize textLabel & detailTextLabel
     self.resizeableLabels = [[NSMutableArray alloc] initWithCapacity:2];
     if (self.textLabel != nil)
@@ -192,8 +194,8 @@
 	{
         [self configureSelf];
         
-		// Force badges to hide on edit.
-        self.badge.hidden = self.editing ? YES : NO;
+		// Hide badges on edit
+        self.badge.hidden = self.hideBadgeDuringEditing && self.editing;
 		
         // Calculate the size of the bage from the badge string
 		CGSize badgeSize = [self.badgeString sizeWithFont:[UIFont boldSystemFontOfSize: self.badge.fontSize]];
@@ -271,7 +273,7 @@
 {
 	[super setEditing:editing animated:animated];
 	
-    self.badge.hidden = editing ? YES : NO;
+    self.badge.hidden = self.hideBadgeDuringEditing && editing;
     [self.badge setNeedsDisplay];
     [self setNeedsDisplay];}
 
