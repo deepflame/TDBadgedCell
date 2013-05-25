@@ -140,6 +140,7 @@
 	if ((self = [super initWithCoder:decoder]))
 	{
 		[self configureSelf];
+        self.hideBadgeDuringEditing = YES;
 	}
 	return self;
 }
@@ -149,6 +150,7 @@
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
 	{
 		[self configureSelf];
+        self.hideBadgeDuringEditing = YES;
 	}
 	return self;
 }
@@ -163,9 +165,7 @@
     
     self.badgeLeftOffset = 10.f;
     self.badgeRightOffset = 12.f;
-    
-    self.hideBadgeDuringEditing = YES;
-    
+        
     // by default, resize textLabel & detailTextLabel
     self.resizeableLabels = [[NSMutableArray alloc] initWithCapacity:2];
     if (self.textLabel != nil)
@@ -191,7 +191,9 @@
 	[super layoutSubviews];
 	
 	if(self.badgeString)
-	{        
+	{
+        [self configureSelf];
+        
 		// Hide badges on edit
         self.badge.hidden = self.hideBadgeDuringEditing && self.editing;
 		
